@@ -1,6 +1,6 @@
 # MyPortfolio
 @2024-Park Sae eun Portfolio
-> site
+> https://main--sen-portfolio.netlify.app/
 
 ### Website Preview
 #### Home Page
