@@ -3,46 +3,68 @@ import { Link } from "react-router-dom";
 
 const InfoBox = ({ text, link, btnText }) => (
   <div className="info-box">
-    <p className="font-medium text-lg sm:text-xl text-white text-center my-4">
+    <p className="my-3 -mt-5 text-base font-light text-center text-white">
       {text}
     </p>
-    <Link
-      to={link}
-      className="neo-btn text-black hover:underline flex items-center space-x-2"
-    >
-      {btnText}
-    </Link>
+    <div className="flex justify-center">
+      <Link to={link} className="flex items-center space-x-2 neo-btn">
+        {btnText}
+      </Link>
+    </div>
   </div>
 );
 
 const renderContent = {
   1: (
-    <h1 className="sm:text-xl text-center text-white mx-5">
-      안녕하세요, <span className="font-semibold">세은</span> 입니다 😁
-      <br />
-      디자인과 개발을 배우고 있습니다
+    <h1 className="mx-5 font-light text-center text-white">
+      안녕하세요, 세은 입니다
+      <br />제 포트폴리오를 소개합니다.
     </h1>
   ),
   2: (
     <InfoBox
-      text="Worked with many companies and picked up many skills along the way"
+      text={
+        <>
+          저는 <span className="font-medium">quick Learner</span> 입니다.
+          <br />
+          새로운 기술을 빠르게 습득해 프로젝트를 성공적으로 이끕니다.
+        </>
+      }
       link="/about"
-      btnText="더보기"
+      btnText="Showcase 1 →"
     />
   ),
   3: (
     <InfoBox
-      text="Led multiple projects to success over the years. Curious about the impact?"
+      text={
+        <>
+          저는 <span className="font-medium">Problem Solver</span> 입니다.
+          <br />
+          팀의 성과를 높이기 위해 문제 해결에 집중합니다.
+        </>
+      }
       link="/projects"
-      btnText="Profile"
+      btnText="Showcase 2 →"
     />
   ),
   4: (
     <InfoBox
-      text="Need a project done or looking for a dev? I'm just a few keystrokes away"
+      text={
+        <>
+          함께 이야기 나누고 싶으시면{" "}
+          <span className="font-medium">연락 주세요!</span> <br />
+          언제든 환영합니다
+        </>
+      }
       link="/contact"
-      btnText="Let's talk"
+      btnText="Contact me"
     />
+  ),
+  5: (
+    <h1 className="mx-5 font-light text-center text-white">
+      Drag up/down to zoom
+      <br /> left/right to rotate!
+    </h1>
   ),
 };
 

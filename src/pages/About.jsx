@@ -1,45 +1,42 @@
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-
-import { skills, experiences } from "../constants";
-import CTA from "../components/CTA";
+import { skills, projects, projects2 } from "../constants"; // projects를 추가로 가져옵니다.
 
 const About = () => {
   return (
-    <section className="max-container">
-      <h1 className="head-text">
-        Hello,{" "}
+    <section className="max-container ">
+      <h1 className=" head-text">
         <span className="blue-gradient_text font -semibold drop-shadow-sm">
-          세은
-        </span>{" "}
-        입니다.
+          Showcase 1
+        </span>
       </h1>
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
-        <p>
-          개발과 디자인 공부에 관심있는 이화여자대학교 컴퓨터공학과
-          학부생입니다. 개발과 디자인을 융합한 interactive design과 AI 기술을
-          이에 활용하는 데 관심이 있습니다.{" "}
+      <div className="flex flex-col gap-3 mt-5 font-medium text-slate-700">
+        <p className="leading-relaxed">
+          저는 새로운 것을 빠르게 배우고 적용하는{" "}
+          <span className="font-semibold">quick learner </span>입니다. 실전에서
+          새로운 기술을 습득하고 프로젝트에 성공적으로 응용한 경험이 있습니다.
+          효율적으로 학습하고 활용하는 능력을 통해 완성도 높은 결과물을 만들어낼
+          수 있습니다. 새로운 도전을 두려워하지 않고 지속적으로 성장하고
+          있습니다. 아래에서 제가 다룰 수 있는 기술과 관련 프로젝트를
+          확인해보세요.
         </p>
       </div>
 
-      <div className="py-10 flex flex-col">
-        <h3 className="subhead-text">Skills</h3>
+      <div className="flex flex-col py-10">
+        <br />
+        <h3 className=" subhead-text">Skills</h3>
 
-        <div className="mt-16 flex flex-wrap gap-12">
+        <div className="flex flex-wrap gap-12 mt-10">
           {skills.map((skill) => (
             <div
               key={skill.id} // id를 key prop으로 설정합니다.
-              className="block-container w-20 h-20"
+              className="w-20 h-20 block-container"
             >
-              <div className="btn-front rounded-xl flex justify-center items-center">
+              <div className="flex items-center justify-center btn-front rounded-xl">
                 <img
                   src={skill.imageUrl}
                   alt={skill.name}
-                  className="w-1/2 h-1/2 object-contain"
+                  className="object-contain w-1/2 h-1/2"
                 />
               </div>
             </div>
@@ -47,69 +44,69 @@ const About = () => {
         </div>
       </div>
 
-      <div className="py-16">
-        <h3 className="subhead-text">Activity</h3>
-        <div className="mt-5 flex flex-col gap-3 text-slate-500">
-          <p>
-            여러 학회와 사람들과 일을 해왔습니다. 이 과정에서 스킬을 레벨업하고
-            협력을 통해 눈부신 결과물을 이루어냈습니다. 아래는 Rundown입니다.{" "}
-          </p>
+      <div className="flex flex-col py-20">
+        <div className="flex flex-col ">
+          <h3 className=" subhead-text">Projects</h3>
 
-          <div className="mt-12 flex">
-            <VerticalTimeline>
-              {experiences.map((experience) => (
-                <VerticalTimelineElement
-                  key={experience.company_name}
-                  date={experience.date}
-                  icon={
-                    <div className="flex justify-center items-center w-full h-full">
+          {projects.map((project, index) => (
+            <div key={index} className="flex flex-col mt-10 ">
+              <div className="flex w-full gap-6">
+                {project.images.map((image, idx) => (
+                  <div key={idx} className="w-[35%] h-40 overflow-hidden">
+                    <div className="flex items-center justify-center w-full h-full bg-gray-800">
                       <img
-                        src={experience.icon}
-                        alt={experience.company_name}
-                        className="w-[60% h-[60%] object-contain"
+                        src={image}
+                        alt={`${project.title} image ${idx + 1}`}
+                        className="object-cover w-full h-full"
                       />
                     </div>
-                  }
-                  iconStyle={{
-                    background: experience.iconBg,
-                  }}
-                  contentStyle={{
-                    borderBottom: "8px",
-                    borderStyle: "solid",
-                    borderBottomColor: experience.iconBg,
-                    boxShadow: "none",
-                  }}
-                >
-                  <div>
-                    <h3 className="text-black text-xl font-poppins font-semibold">
-                      {experience.title}
-                    </h3>
-                    <p
-                      className="text-black-500 font-medium font-base"
-                      style={{ margin: 0 }}
-                    >
-                      {experience.company_name}
-                    </p>
                   </div>
-                  <ul className="my-5 list-disc ml-5 space-y-2">
-                    {experience.points.map((point, index) => (
-                      <li
-                        key={`experience-point-${index}`}
-                        className="text-black-500/50 font-normal pl-1 text-sm"
-                      >
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </VerticalTimelineElement>
-              ))}
-            </VerticalTimeline>
-          </div>
+                ))}
+              </div>
+              <div className="mt-10">
+                <h4 className="text-xl font-medium text-black">
+                  {project.title}
+                </h4>
+              </div>
+              <div className="flex flex-col gap-3 mt-5 font-light text-slate-700">
+                <p className="leading-relaxed">{project.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col py-20">
+          <br />
+          <br />
+          <h3 className=" subhead-text">Side-Projects</h3>
+
+          {projects2.map((project, index) => (
+            <div key={index} className="flex flex-col mt-10 ">
+              <div className="flex w-full gap-6">
+                {project.images.map((image, idx) => (
+                  <div key={idx} className="w-[35%] h-40 overflow-hidden">
+                    <div className="flex items-center justify-center w-full h-full bg-gray-800">
+                      <img
+                        src={image}
+                        alt={`${project.title} image ${idx + 1}`}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10">
+                <h4 className="text-xl font-medium text-black">
+                  {project.title}
+                </h4>
+              </div>
+              <div className="flex flex-col gap-3 mt-5 font-light text-slate-700">
+                <p className="leading-relaxed">{project.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      <hr className="border-slate-200" />
-      <CTA />
     </section>
   );
 };

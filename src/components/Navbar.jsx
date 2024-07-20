@@ -1,30 +1,56 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
+  const isShowcasePage =
+    location.pathname === "/about" || location.pathname === "/projects";
+
   return (
     <header className="header">
-      <NavLink
-        to="/"
-        className="w-10 h-10 rounded-lg bg-white items-center justify-center flex font-bold shadow-md"
+      <div className="flex items-center">
+        <NavLink
+          to="/"
+          className={`flex items-center justify-center h-12 font-light ${
+            isShowcasePage ? "text-black" : "text-white"
+          }`}
+        >
+          <p className="leading-tight text-left">
+            Sen's <br />
+            Portfolio
+          </p>
+        </NavLink>
+      </div>
+      <div className="flex-grow"></div>{" "}
+      {/* 이 요소가 가운데 공간을 차지하게 합니다 */}
+      <nav
+        className={`flex items-center justify-center h-12 font-light gap-7 ${
+          isShowcasePage ? "text-black" : "text-white"
+        }`}
       >
-        <p className="blue-gradient_text">홈</p>
-      </NavLink>
-      <nav className="flex text-lg gap-7 font-medium">
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? "text-blue-500" : "text-black"
+            isActive
+              ? "text-blue-500"
+              : isShowcasePage
+              ? "text-black"
+              : "text-white"
           }
         >
-          About
+          Showcase1
         </NavLink>
         <NavLink
           to="/projects"
           className={({ isActive }) =>
-            isActive ? "text-blue-500" : "text-black"
+            isActive
+              ? "text-blue-500"
+              : isShowcasePage
+              ? "text-black"
+              : "text-white"
           }
         >
-          Projects
+          Showcase2
         </NavLink>
       </nav>
     </header>

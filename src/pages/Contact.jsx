@@ -1,18 +1,14 @@
-import React, { useState, useRef, Suspense } from "react";
+import React, { useState, useRef } from "react";
 import useAlert from "../hooks/useAlert";
 import emailjs from "@emailjs/browser";
-import { Canvas } from "@react-three/fiber";
-
-import Space from "../models/Space";
-
-import Loader from "../components/Loader";
 import Alert from "../components/Alert";
+import { FaGithub, FaBlog } from "react-icons/fa"; // Font Awesome 아이콘 사용
+import profilePic from "../assets/images/profile.jpg"; // 프로필 사진 파일 경로
 
 const Contact = () => {
   const formRef = useRef(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const [currentAnimation, setCurrentAnimation] = useState("idle");
 
   const { alert, showAlert, hideAlert } = useAlert();
 
@@ -23,7 +19,6 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission
     setIsLoading(true);
-    setCurrentAnimation("hit");
 
     emailjs
       .send(
@@ -47,14 +42,13 @@ const Contact = () => {
         });
 
         setTimeout(() => {
-          setCurrentAnimation("idle");
           setForm({ name: "", email: "", message: "" });
         }, [3000]);
       })
       .catch((error) => {
         setIsLoading(false);
-        setCurrentAnimation("idle");
-        console.error(error.text);
+        console.error(error);
+
         showAlert({
           show: true,
           text: "I didn't receive your message",
@@ -63,88 +57,94 @@ const Contact = () => {
       });
   };
 
-  const handleFocus = () => setCurrentAnimation("walk");
-  const handleBlur = () => setCurrentAnimation("idle");
-
   return (
-    <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
-      {alert.show && <Alert {...alert} />}
-      <div className="flex-1 min-2-[50%] flex flex-col">
-        <h1 className="head-text">인사하기</h1>
+    <section className="relative w-full h-screen bg-black">
+      <div className="relative flex lg:flex-row flex-col max-container h-[100vh]">
+        {alert.show && <Alert {...alert} />}
+        <div className="flex-1 min-w-[50%] flex flex-col p-8">
+          <span className="mb-10 text-4xl font-bold blue-gradient_text drop-shadow-sm">
+            Contact
+          </span>
 
-        <form
-          className="flex flex-col w-full gap-7 mt-14"
-          onSubmit={handleSubmit}
-          ref={formRef}
-        >
-          <label className="font-semibold text-black-500">
-            이름
-            <input
-              type="text"
-              name="name"
-              className="input"
-              placeholder="박세은"
-              required
-              value={form.name}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </label>
-          <label className="font-semibold text-black-500">
-            메일
-            <input
-              type="email"
-              name="email"
-              className="input"
-              placeholder="yellowsubmarine372@gmail.com"
-              required
-              value={form.email}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </label>
-          <label className="font-semibold text-black-500">
-            메세지
-            <textarea
-              name="message"
-              rows={4}
-              className="textarea"
-              placeholder="인사 한번 해주세요!"
-              required
-              value={form.message}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </label>
-          <button type="submit" className="btn" disabled={isLoading}>
-            {isLoading ? "전송 중..." : "전송하기"}
-          </button>
-        </form>
-      </div>
+          <form
+            className="flex flex-col w-full gap-6"
+            onSubmit={handleSubmit}
+            ref={formRef}
+          >
+            <div className="flex flex-col">
+              <label className="mb-2 font-semibold text-white">이름</label>
+              <input
+                type="text"
+                name="name"
+                className="px-4 py-2 text-white bg-transparent border-b border-gray-500 focus:outline-none focus:border-blue-500"
+                placeholder="박세은"
+                required
+                value={form.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-2 font-semibold text-white">메일</label>
+              <input
+                type="email"
+                name="email"
+                className="px-4 py-2 text-white bg-transparent border-b border-gray-500 focus:outline-none focus:border-blue-500"
+                placeholder="yellowsubmarine372@gmail.com"
+                required
+                value={form.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-2 font-semibold text-white">메세지</label>
+              <textarea
+                name="message"
+                rows={4}
+                className="px-4 py-2 text-white bg-transparent border-b border-gray-500 focus:outline-none focus:border-blue-500"
+                placeholder="인사 한번 해주세요!"
+                required
+                value={form.message}
+                onChange={handleChange}
+              />
+            </div>
+            <button
+              type="submit"
+              className="p-3 text-white rounded-lg custom-gradient-button disabled:opacity-50"
+              disabled={isLoading}
+            >
+              {isLoading ? "전송 중..." : "전송하기"}
+            </button>
+          </form>
+        </div>
 
-      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
-        <Canvas
-          camera={{
-            position: [0, 0, 5],
-            fov: 75,
-            near: 0.1,
-            far: 1000,
-          }}
-        >
-          <directionalLight intensity={2.5} position={[0, 0, 1]} />
-          <ambientLight intensity={0.5} />
-          <Suspense fallback={<Loader />}>
-            <Fox
-              currentAnimation={currentAnimation}
-              position={[0.5, 0.35, 0]}
-              rotation={[12.6, -0.6, 0]}
-              scale={[0.5, 0.5, 0.5]}
-            />
-          </Suspense>
-        </Canvas>
+        <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] flex flex-col justify-center items-center p-8">
+          <img
+            src={profilePic}
+            alt="Profile"
+            className="w-48 h-48 mb-10 rounded-full" // 프로필 사진 크기를 더 키움
+          />
+          <div className="flex flex-col items-center space-y-2">
+            <a
+              href="https://github.com/yellowsubmarine372"
+              className="flex items-center text-base font-light text-white hover:text-slate-400" // 글씨 크기 조정
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub className="mr-2" /> @yellowsubmarine372
+            </a>
+            <a
+              href="https://velog.io/@yellow372/posts"
+              className="flex items-center text-base font-light text-white hover:text-slate-400" // 글씨 크기 조정
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaBlog className="mr-2" /> @yellow372
+            </a>
+          </div>
+          <div className="mt-8 text-sm text-white">
+            &copy; Park Sae eun 2024
+          </div>
+        </div>
       </div>
     </section>
   );

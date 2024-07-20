@@ -1,8 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
+/* Tailwind CSS Imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom CSS */
+:root {
+  /* your custom variables here */
+}
 
 :root {
   --blue-rgb: 237 245 255;
@@ -10,7 +16,7 @@
 }
 
 body {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 body:has(.card[data-color="blue"]:hover) {
@@ -27,31 +33,25 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .head-text {
-    @apply sm:text-5xl text-3xl font-semibold sm:leading-snug font-poppins;
+    @apply sm:text-4xl font-medium sm:leading-snug;
+    font-family: "Pretendard", sans-serif;
   }
 
   .subhead-text {
-    @apply font-semibold sm:text-3xl text-xl relative font-poppins;
+    @apply font-semibold sm:text-2xl relative;
+    font-family: "Pretendard", sans-serif;
   }
 
   .blue-gradient_text {
     @apply bg-gradient-to-r from-[#00c6ff] to-[#0072ff] bg-clip-text text-transparent;
   }
 
-  .input {
-    @apply bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card;
-  }
-
-  .textarea {
-    @apply block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card;
-  }
-
   .btn {
-    @apply text-white bg-gradient-to-r from-[#00c6ff] to-[#0072ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
+    @apply text-white bg-gradient-to-r from-[#00c6ff] to-[#0072ff] bg-clip-text text-transparent;
   }
 
   .header {
-    @apply flex justify-between items-center sm:px-16 px-8 py-4 max-w-5xl mx-auto absolute top-0 bg-transparent z-10 right-0 left-0;
+    @apply flex justify-between items-center sm:px-16 px-8 py-4 w-full absolute top-0 bg-transparent z-10;
   }
 
   .footer {
@@ -67,7 +67,14 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .neo-btn {
-    @apply py-2 px-4 rounded-lg text-white text-center font-semibold bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 border border-transparent hover:from-blue-500 hover:to-blue-700 transition-all duration-300 ease-in-out sm:w-1/3 w-[70%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-2 shadow-lg hover:shadow-xl;
+    @apply py-2 px-4 text-white text-center font-light bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full transition-all duration-300 ease-in-out flex justify-center items-center shadow-lg hover:shadow-xl;
+    width: fit-content;
+    padding-left: 2.3rem; /* 좌우 패딩 조정 */
+    padding-right: 2.3rem; /* 좌우 패딩 조정 */
+  }
+
+  .neo-btn:hover {
+    @apply from-blue-500 to-blue-700;
   }
 
   .cta {
@@ -180,4 +187,13 @@ body:has(.card[data-color="green"]:hover) {
   border: #fff;
   box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
     0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
+}
+
+.custom-gradient-button {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  transition: background 0.3s ease;
+}
+
+.custom-gradient-button:hover {
+  background: linear-gradient(to right, #0056b3, #004099);
 }
