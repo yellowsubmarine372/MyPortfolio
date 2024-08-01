@@ -4,7 +4,8 @@
 
 ### Website Preview
 #### Home Page
-![final main](https://github.com/user-attachments/assets/502f8b81-9b46-49e7-bb54-75fd5c414b64)
+![화면 기록 2024-07-31 오후 7 17 47 (1)](https://github.com/user-attachments/assets/a7ed0f03-a98b-4d04-865d-6ca975160b92)
+
 
 #### Showcase1 Page
 <img width="900" alt="스크린샷 2024-07-20 오후 4 59 32" src="https://github.com/user-attachments/assets/bffb4def-789a-4371-a470-81798c742285">
